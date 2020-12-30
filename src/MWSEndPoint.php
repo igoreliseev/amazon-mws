@@ -145,6 +145,12 @@ class MWSEndPoint{
             'action' => 'GetLowestPricedOffersForASIN',
             'path' => '/Products/2011-10-01',
             'date' => '2011-10-01'
+        ],
+        'GetFinancialEvents' => [
+            'method' => 'POST',
+            'action' => 'GetFinancialEvents',
+            'path' => '/Finances/2015-05-01',
+            'date' => '2015-05-01'
         ]
     ];
 

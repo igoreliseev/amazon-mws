@@ -211,6 +211,23 @@ class MWSClient{
     }
 
     /**
+     * Returns financial events data.
+     *
+     * @return array
+     */
+    public function GetFinancialEvents()
+    {
+
+        $query = [
+            'Action' => 'ListFinancialEvents',
+            'PostedAfter' => date(DATE_ISO8601, strtotime('-30 days')),
+        ];
+
+        return $this->request( 'GetFinancialEvents', $query );
+
+    }
+
+    /**
      * Returns pricing information for your own offer listings, based on SKU.
      * @param array  [$sku_array = []]
      * @param string [$ItemCondition = null]
