@@ -220,7 +220,7 @@ class MWSClient{
 
         $query = [
             'Action' => 'ListFinancialEvents',
-            'PostedAfter' => date(DATE_ISO8601, strtotime('-30 days')),
+            'PostedAfter' => date(DATE_ISO8601, strtotime('-179 days')),
         ];
 
         return $this->request( 'GetFinancialEvents', $query );
