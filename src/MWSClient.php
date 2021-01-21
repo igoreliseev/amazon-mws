@@ -1166,7 +1166,8 @@ class MWSClient{
 	
 	    $counter = 1;
 	    $query = [
-		    'MarketplaceId' => $this->config['Marketplace_Id']
+		    'MarketplaceId' => $this->config['Marketplace_Id'],
+            'QueryStartDateTime' => date(DATE_ISO8601, strtotime('-12 month'))
 	    ];
 	
 	    foreach($sku_array as $key){
