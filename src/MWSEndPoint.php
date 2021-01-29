@@ -151,6 +151,12 @@ class MWSEndPoint{
             'action' => 'GetFinancialEvents',
             'path' => '/Finances/2015-05-01',
             'date' => '2015-05-01'
+        ],
+        'GetFinancialEventsByNextToken' => [
+            'method' => 'POST',
+            'action' => 'ListFinancialEventsByNextToken',
+            'path' => '/Finances/2015-05-01',
+            'date' => '2015-05-01'
         ]
     ];
 

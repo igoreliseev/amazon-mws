@@ -228,6 +228,23 @@ class MWSClient{
     }
 
     /**
+     * Returns financial events data by Next Token
+     *
+     * @param string $nextToken
+     * @return array
+     */
+    public function GetFinancialEventsByNextToken($nextToken)
+    {
+
+        $query = [
+            'NextToken' => $nextToken,
+        ];
+
+        return $this->request( 'GetFinancialEventsByNextToken', $query );
+
+    }
+
+    /**
      * Returns pricing information for your own offer listings, based on SKU.
      * @param array  [$sku_array = []]
      * @param string [$ItemCondition = null]
