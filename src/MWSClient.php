@@ -213,15 +213,21 @@ class MWSClient{
     /**
      * Returns financial events data.
      *
+     * @param string $startDate in DATE_ISO8601
+     * @param string|null $endDate in DATE_ISO8601
      * @return array
      */
-    public function GetFinancialEvents()
+    public function GetFinancialEvents($startDate, $endDate = null)
     {
 
         $query = [
             'Action' => 'ListFinancialEvents',
-            'PostedAfter' => date(DATE_ISO8601, strtotime('-179 days')),
+            'PostedAfter' => $startDate,
         ];
+
+        if ($endDate) {
+            $query['PostedBefore'] = $endDate;
+        }
 
         return $this->request( 'GetFinancialEvents', $query );
 
