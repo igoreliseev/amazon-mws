@@ -1220,9 +1220,9 @@ class MWSClient{
     }
 
     /**
-     * Get a list's inventory for Amazon's fulfillment
+     * Get a list's inventory for Amazon's fulfillment by Next token
      *
-     * @param array $sku_array
+     * @param string $token
      *
      * @return array
      * @throws Exception
@@ -1230,8 +1230,7 @@ class MWSClient{
     public function ListInventorySupplyByNextToken($token)
     {
         $query = [
-            'MarketplaceId' => $this->config['Marketplace_Id'],
-            'QueryStartDateTime' => date(DATE_ISO8601, strtotime('-12 month'))
+            'NextToken' => $token,
         ];
 
         $response = $this->request(
