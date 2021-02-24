@@ -1234,21 +1234,21 @@ class MWSClient{
         ];
 
         $response = $this->request(
-            'ListInventorySupply',
+            'ListInventorySupplyByNextToken',
             $query
         );
 
         $result = [];
-        if (isset($response['ListInventorySupplyResult']['InventorySupplyList']['member'])) {
-            foreach ($response['ListInventorySupplyResult']['InventorySupplyList']['member'] as $index => $ListInventorySupplyResult) {
+        if (isset($response['ListInventorySupplyByNextTokenResult']['InventorySupplyList']['member'])) {
+            foreach ($response['ListInventorySupplyByNextTokenResult']['InventorySupplyList']['member'] as $index => $ListInventorySupplyResult) {
                 $result[$index] = $ListInventorySupplyResult;
             }
         }
 
         $data['InventorySupply'] = $result;
 
-        if (isset($response['ListInventorySupplyResult']['NextToken'])) {
-            $data['NextToken'] = $response['ListInventorySupplyResult']['NextToken'];
+        if (isset($response['ListInventorySupplyByNextTokenResult']['NextToken'])) {
+            $data['NextToken'] = $response['ListInventorySupplyByNextTokenResult']['NextToken'];
         }
 
         return $data;
