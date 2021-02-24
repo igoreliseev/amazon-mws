@@ -84,6 +84,12 @@ class MWSEndPoint{
             'path' => '/FulfillmentInventory',
             'date' => '2010-10-01'
         ],
+        'ListInventorySupplyByNextToken' => [
+            'method' => 'POST',
+            'action' => 'ListInventorySupplyByNextToken',
+            'path' => '/FulfillmentInventory',
+            'date' => '2010-10-01'
+        ],
         'ListOrders' => [
             'method' => 'POST',
             'action' => 'ListOrders',

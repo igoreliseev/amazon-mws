@@ -1172,7 +1172,7 @@ class MWSClient{
         return false;
 
     }
-    
+
     /**
 	 * Get a list's inventory for Amazon's fulfillment
 	 *
@@ -1182,35 +1182,77 @@ class MWSClient{
 	 * @throws Exception
 	 */
     public function ListInventorySupply($sku_array = []){
-	
+
 	    if (count($sku_array) > 50) {
 		    throw new Exception('Maximum amount of SKU\'s for this call is 50');
 	    }
-	
+
 	    $counter = 1;
 	    $query = [
 		    'MarketplaceId' => $this->config['Marketplace_Id'],
             'QueryStartDateTime' => date(DATE_ISO8601, strtotime('-12 month'))
 	    ];
-	
+
 	    foreach($sku_array as $key){
 		    $query['SellerSkus.member.' . $counter] = $key;
 		    $counter++;
 	    }
-	
+
 	    $response = $this->request(
 		    'ListInventorySupply',
 		    $query
 	    );
-	
+
 	    $result = [];
 	    if (isset($response['ListInventorySupplyResult']['InventorySupplyList']['member'])) {
 		    foreach ($response['ListInventorySupplyResult']['InventorySupplyList']['member'] as $index => $ListInventorySupplyResult) {
 			    $result[$index] = $ListInventorySupplyResult;
 		    }
 	    }
-	    
-	    return $result;
+
+        $data['InventorySupply'] = $result;
+
+        if (isset($response['ListInventorySupplyResult']['NextToken'])) {
+            $data['NextToken'] = $response['ListInventorySupplyResult']['NextToken'];
+        }
+
+        return $data;
+    }
+
+    /**
+     * Get a list's inventory for Amazon's fulfillment
+     *
+     * @param array $sku_array
+     *
+     * @return array
+     * @throws Exception
+     */
+    public function ListInventorySupplyByNextToken($token)
+    {
+        $query = [
+            'MarketplaceId' => $this->config['Marketplace_Id'],
+            'QueryStartDateTime' => date(DATE_ISO8601, strtotime('-12 month'))
+        ];
+
+        $response = $this->request(
+            'ListInventorySupply',
+            $query
+        );
+
+        $result = [];
+        if (isset($response['ListInventorySupplyResult']['InventorySupplyList']['member'])) {
+            foreach ($response['ListInventorySupplyResult']['InventorySupplyList']['member'] as $index => $ListInventorySupplyResult) {
+                $result[$index] = $ListInventorySupplyResult;
+            }
+        }
+
+        $data['InventorySupply'] = $result;
+
+        if (isset($response['ListInventorySupplyResult']['NextToken'])) {
+            $data['NextToken'] = $response['ListInventorySupplyResult']['NextToken'];
+        }
+
+        return $data;
     }
 
     /**
