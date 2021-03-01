@@ -12,6 +12,12 @@ class MWSEndPoint{
             'path' => '/Recommendations/2013-04-01',
             'date' => '2013-04-01'
         ],
+        'ListRecommendationsByNextToken' => [
+            'method' => 'POST',
+            'action' => 'ListRecommendationsByNextToken',
+            'path' => '/Recommendations/2013-04-01',
+            'date' => '2013-04-01'
+        ],
         'ListMarketplaceParticipations' => [
             'method' => 'POST',
             'action' => 'ListMarketplaceParticipations',

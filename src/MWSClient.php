@@ -810,6 +810,27 @@ class MWSClient{
     }
 
     /**
+     * Returns your active recommendations for a specific category or for all categories for a specific marketplace.
+     * @param string [$RecommendationCategory = null] One of: Inventory, Selection, Pricing, Fulfillment, ListingQuality, GlobalSelling, Advertising
+     * @return array/false if no result
+     */
+    public function ListRecommendationsByNextToken($token)
+    {
+        $query = [
+            'NextToken' => $token,
+        ];
+
+        $result = $this->request('ListRecommendationsByNextToken', $query);
+
+        if (isset($result['ListRecommendationsByNextTokenResult'])) {
+            return $result['ListRecommendationsByNextTokenResult'];
+        } else {
+            return false;
+        }
+
+    }
+
+    /**
      * Returns a list of marketplaces that the seller submitting the request can sell in, and a list of participations that include seller-specific information in that marketplace
      * @return array
      */
